@@ -1,0 +1,15 @@
+{
+"name": "from-code-to-cloud-lab",
+"features": {
+"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+"ghcr.io/devcontainers/features/kubectl:1": {},
+"ghcr.io/devcontainers/features/helm:1": {}
+},
+"customizations": {
+"vscode": {
+"settings": {
+"terminal.integrated.defaultProfile.linux": "bash"
+}
+}
+},
+"postCreateCommand": "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash && echo '✅ k3d installed' && k3d version"
