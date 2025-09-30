@@ -1,0 +1,17 @@
+name: CI
+on:
+push:
+pull_request:
+jobs:
+validate:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- name: Setup kubeconform (validate k8s YAML)
+uses: docker://ghcr.io/yannh/kubeconform:latest
+with:
+args: -strict -summary -output text k8s/
+- name: YAML Lint
+uses: ibiqlik/action-yamllint@v3
+with:
+config_file: .yamllint.yml
