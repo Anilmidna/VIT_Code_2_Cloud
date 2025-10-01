@@ -1,45 +1,10 @@
 {
-"postStartCommand": "bash -lc 'set -e; for i in {1..60}; do if docker info >/dev/null 2>&1; then echo Docker-ready; break; else echo Waiting-for-Docker; sleep 2; fi; done; docker --version; k3d version || true'"
-}
-```json
-{
-"name": "from-code-to-cloud-lab",
-"features": {
-"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-"ghcr.io/devcontainers/features/kubectl:1": {},
-"ghcr.io/devcontainers/features/helm:1": {}
-},
-"hostRequirements": {
-"cpus": 2,
-"memory": "4gb"
-},
-"customizations": {
-"vscode": {
-"settings": {
-"terminal.integrated.defaultProfile.linux": "bash"
-},
-"extensions": [
-"ms-kubernetes-tools.vscode-kubernetes-tools",
-"ms-azuretools.vscode-docker"
-]
-}
-},
-"postStartCommand": "bash -lc 'set -euo pipefail; if ! command -v k3d >/dev/null 2>&1; then curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash; fi; for i in {1..60}; do if docker info >/dev/null 2>&1; then break; else echo Waiting for Docker...; sleep 2; fi; done; echo \"✅ Docker ready\"; k3d version || true'"
-}
-```json
-{
-"name": "from-code-to-cloud-lab",
-"features": {
-"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-"ghcr.io/devcontainers/features/kubectl:1": {},
-"ghcr.io/devcontainers/features/helm:1": {}
-},
-"customizations": {
-"vscode": {
-"settings": {
-"terminal.integrated.defaultProfile.linux": "bash"
-}
-}
-},
-"postCreateCommand": "curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash && echo '✅ k3d installed' && k3d version"
+  "name": "bootstrap-dind",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "runArgs": ["--privileged"],
+  "overrideCommand": false,
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "hostRequirements": { "cpus": 2, "memory": "4gb" }
 }
