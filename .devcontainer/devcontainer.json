@@ -1,4 +1,8 @@
 {
+"postStartCommand": "bash -lc 'set -e; for i in {1..60}; do if docker info >/dev/null 2>&1; then echo Docker-ready; break; else echo Waiting-for-Docker; sleep 2; fi; done; docker --version; k3d version || true'"
+}
+```json
+{
 "name": "from-code-to-cloud-lab",
 "features": {
 "ghcr.io/devcontainers/features/docker-in-docker:2": {},
